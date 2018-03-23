@@ -1,0 +1,89 @@
+[OSEv3]
+
+[OSEv3:children]
+masters
+nodes
+etcd
+
+[OSEv3:vars]
+ansible_ssh_user=fedora
+ansible_python_interpreter=/usr/bin/python3
+ansible_become=True
+openshift_deployment_type=origin
+openshift_release=v3.9
+openshift_image_tag=v3.9.0
+
+
+osm_cluster_network_cidr=10.128.0.0/14
+openshift_portal_net=172.30.0.0/16
+osm_host_subnet_length=9
+
+# openshift_master_bootstrap_auto_approve=true
+# openshift_master_bootstrap_auto_approver_node_selector={"region":"infra"}
+# osm_controller_args={"experimental-cluster-signing-duration": ["20m"]}
+# openshift_node_bootstrap=True
+# openshift_master_bootstrap_enabled=True
+# openshift_hosted_infra_selector="node-role.kubernetes.io/infra=true"
+# osm_default_node_selector="node-role.kubernetes.io/compute=true"
+
+[masters]
+ec2-34-228-214-115.compute-1.amazonaws.com
+
+
+
+[masters:vars]
+# openshift_node_labels={'node-role.kubernetes.io': 'true', 'node-role.kubernetes.io/compute': 'true'}
+openshift_schedulable=True
+openshift_node_labels={'region': 'infra','zone': 'default'}
+
+
+[etcd:children]
+masters
+
+[nodes]
+
+[new_nodes]
+ec2-35-153-99-51.compute-1.amazonaws.com
+ec2-35-174-12-155.compute-1.amazonaws.com
+ec2-54-197-156-254.compute-1.amazonaws.com
+ec2-34-229-108-102.compute-1.amazonaws.com
+ec2-54-91-62-170.compute-1.amazonaws.com
+ec2-52-23-245-212.compute-1.amazonaws.com
+ec2-34-228-247-103.compute-1.amazonaws.com
+ec2-54-82-227-219.compute-1.amazonaws.com
+ec2-35-173-237-136.compute-1.amazonaws.com
+ec2-54-152-244-185.compute-1.amazonaws.com
+ec2-18-232-130-116.compute-1.amazonaws.com
+ec2-34-238-131-67.compute-1.amazonaws.com
+ec2-52-202-0-105.compute-1.amazonaws.com
+ec2-54-242-215-39.compute-1.amazonaws.com
+ec2-34-229-197-231.compute-1.amazonaws.com
+ec2-54-159-115-218.compute-1.amazonaws.com
+ec2-54-234-61-171.compute-1.amazonaws.com
+ec2-35-168-19-106.compute-1.amazonaws.com
+ec2-54-210-23-245.compute-1.amazonaws.com
+ec2-35-174-17-99.compute-1.amazonaws.com
+ec2-52-207-58-86.compute-1.amazonaws.com
+ec2-52-200-74-167.compute-1.amazonaws.com
+ec2-107-23-239-69.compute-1.amazonaws.com
+ec2-35-153-70-171.compute-1.amazonaws.com
+ec2-35-153-141-241.compute-1.amazonaws.com
+ec2-35-153-100-124.compute-1.amazonaws.com
+ec2-34-229-51-149.compute-1.amazonaws.com
+ec2-35-153-160-37.compute-1.amazonaws.com
+ec2-54-164-49-62.compute-1.amazonaws.com
+ec2-52-91-65-201.compute-1.amazonaws.com
+ec2-35-153-178-61.compute-1.amazonaws.com
+ec2-35-173-181-75.compute-1.amazonaws.com
+ec2-35-174-0-177.compute-1.amazonaws.com
+ec2-107-22-108-159.compute-1.amazonaws.com
+ec2-54-174-137-44.compute-1.amazonaws.com
+ec2-54-145-238-139.compute-1.amazonaws.com
+ec2-54-146-42-104.compute-1.amazonaws.com
+ec2-54-152-55-3.compute-1.amazonaws.com
+
+
+
+[nodes:children]
+masters
+new_nodes
